@@ -1,0 +1,52 @@
+#------------------------------------------------------------------------------
+'''
+    Description: This file contains function to format and print the service group information.
+
+    @author:  Aishwarya Raghavan
+
+    TTAP-4002
+
+'''
+
+#------------------------------------------------------------------------------
+
+data_values =     [
+    "A-HOME HEALTH CARE                                          ,RH001867243    ,RH001867243    ,RH001867242    ,RH001867240    ,99500,HOME HEALTH CARE CPT/HCPCS                                  ,CPT",
+    "A-HOME HEALTH CARE                                          ,RH001867243    ,RH001867243    ,RH001867242    ,RH001867240    ,99501,HOME HEALTH CARE CPT/HCPCS                                  ,CPT"
+]
+
+
+#================================
+
+   data_list=[A-HOME HEALTH CARE  RH001867243        RH001867243       RH001867242              RH001867240             99500        HOME HEALTH CARE CPT/HCPCS  CPT]
+                                   
+  
+   
+   "A-SURGICAL DAY CARE                                         	RH101059       	RH101059       	RH001280289    	RH001280290    	21147	SURGICAL PROCEDURE_CPT CODES  CPT",
+"A-SURGICAL DAY CARE                                         	RH101059       	RH101059       	RH001280289    	RH001280290    	21150	SURGICAL PROCEDURE_CPT CODES                                	CPT"
+
+
+
+#====================================
+
+def print_in_format(data_values):
+    for data in data_values:
+        data_list = [x.strip().replace('\t', '') for x in data.split(',')]
+        code_type = data_list[-1]
+        # import pdb;pdb.set_trace()
+        cpt_code = data_list[-3]
+        category_id = data_list[1]
+        sub_category_id = data_list[3]
+        group_id = data_list[-4]
+        group_desc =  data_list[0]
+
+        if code_type == "CPT":
+            string_format = f'"{cpt_code}":[{{"svcCategoryId":"{category_id}", "svcSubcategoryId":"{sub_category_id}", "svcGroupId": "{group_id}", "svcgroup":"{group_desc}"}}]'
+            print(string_format)
+        else:
+         
+            pass
+
+
+if __name__ == "__main__":
+    print_in_format(data_values)
